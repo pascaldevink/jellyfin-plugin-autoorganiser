@@ -126,7 +126,7 @@ public class LibraryOrganiser : LibraryOrganiser<Movie, FileHandler, FilePathFor
         var parentDirectory = Path.GetDirectoryName(movie.Path)!;
         var parentName = FormatParentName(movie, parent);
         moved |= FileHandler.MoveExtras(
-            movie.GetExtras().ToArray(),
+            movie.GetExtras(user: null).ToArray(),
             parentDirectory,
             parentName,
             movie.GetBaseItemKind(),

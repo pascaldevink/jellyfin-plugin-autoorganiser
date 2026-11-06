@@ -31,7 +31,7 @@ jobs:
       - name: 🛒 Checkout actions
         uses: actions/checkout@v3
         with:
-          repository: geo-martino/jellyfin-plugin-repository
+          repository: pascaldevink/jellyfin-plugin-repository
           path: repository/
           sparse-checkout: ./.github/actions/
 
@@ -39,7 +39,7 @@ jobs:
         id: build
         uses: ./repository/.github/actions/build-plugin
         with:
-          dotnet-version: "9.0.x"
+          dotnet-version: "10.0.x"
           project-dir: "Jellyfin.Plugin.AutoOrganiser"
           logo-file: "images/logo.png"
           is-release: true
@@ -56,7 +56,7 @@ jobs:
       - name: 🛒 Checkout actions
         uses: actions/checkout@v3
         with:
-          repository: geo-martino/jellyfin-plugin-repository
+          repository: pascaldevink/jellyfin-plugin-repository
           path: repository/
           sparse-checkout: ./.github/actions/
 

@@ -121,7 +121,7 @@ public class LibraryOrganiser : LibraryOrganiser<Episode, FileHandler, FilePathF
         };
 
         _ = FileHandler.MoveExtras(
-            folder.GetExtras().ToArray(),
+            folder.GetExtras(user: null).ToArray(),
             parentDirectory,
             parentName,
             folder.GetBaseItemKind(),
