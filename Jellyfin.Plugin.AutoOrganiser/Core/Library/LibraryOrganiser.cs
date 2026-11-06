@@ -350,7 +350,7 @@ public abstract class LibraryOrganiser<TItem, TFileHandler, TPathFormatter>
     protected void LinkItemToParentFolder(BaseItem item, Folder? parent = null)
     {
         parent ??= FindParentFolder(item);
-        if (parent is null || parent.LinkedChildren.Select(child => child.Path).Contains(item.Path))
+        if (parent is null || parent.LinkedChildren.Any(child => child.ItemId == item.Id))
         {
             return;
         }
@@ -364,7 +364,7 @@ public abstract class LibraryOrganiser<TItem, TFileHandler, TPathFormatter>
 
         var linkedChild = LinkedChild.Create(item);
         parent.LinkedChildren = parent.LinkedChildren.AsEnumerable()
-            .Where(child => File.Exists(child.Path))
+            .Where(child => child.ItemId is { } id && LibraryManager.GetItemById(id) is not null)
             .Append(linkedChild).ToArray();
     }
 

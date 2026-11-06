@@ -40,7 +40,7 @@ public class FilePathFormatter : FilePathFormatter<Movie>
     public string Format(Movie item, BoxSet boxSet)
     {
         var boxSetName = new DirectoryInfo(Format(boxSet)).Name;
-        var forceSubFolder = boxSet.GetRecursiveChildren().OfType<Movie>().Sum(movie => movie.ExtraIds.Length) > 0;
+        var forceSubFolder = boxSet.GetRecursiveChildren().OfType<Movie>().Any(movie => movie.GetExtras(user: null).Any());
         return Path.Combine(item.GetTopParent().Path, boxSetName, GetStemPath(item, forceSubFolder));
     }
 
@@ -59,7 +59,7 @@ public class FilePathFormatter : FilePathFormatter<Movie>
 
     private string AppendSubFolder(Movie movie, string path, bool forceSubFolder = false)
     {
-        if (!forceSubFolder && !_forceSubFolder && movie.ExtraIds.Length == 0)
+        if (!forceSubFolder && !_forceSubFolder && !movie.GetExtras(user: null).Any())
         {
             return path;
         }
